@@ -94,12 +94,12 @@ a { color: inherit; }
   flex: 1;
   min-width: 0;
   background: var(--blue);
-  clip-path: polygon(46px 0, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(22px 0, 100% 0, 100% 100%, 0 100%);
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
-  padding: 0 32px 0 76px;
+  padding: 0 32px 0 48px;
 }
 
 .nav {
