@@ -1,74 +1,147 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Arroyo Seco · Accesos</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Planta Arroyo Seco | Cremer y Asociados</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#EEF1EC; --ink:#1C2A22; --muted:#5E6B63; --line:#C9D1CA;
-    --accent:#C8962E; --card:#FFFFFF;
+    --azul:#0076AE; --azul-osc:#005A86; --azul-noche:#0A2E45; --celeste:#E6F2F8;
+    --bg:#FFFFFF; --gris:#F4F6F8; --ink:#1D2B36; --muted:#5F6E7A; --line:#DCE3E8;
     box-sizing:border-box;
     padding-top:env(safe-area-inset-top,0px);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#141B17; --ink:#E7ECE8; --muted:#9AA69F; --line:#2D3832; --card:#1B241F;
-    }
-  }
   *{box-sizing:inherit;margin:0}
-  body{background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.5}
-  main{max-width:720px;margin:0 auto;padding:48px 20px 64px}
-  header{border-left:6px solid var(--accent);padding-left:16px;margin-bottom:32px}
-  h1{font-size:clamp(2.2rem,7vw,3.4rem);font-weight:800;letter-spacing:-.02em;line-height:1}
-  header p{color:var(--muted);margin-top:8px}
-  input{width:100%;padding:14px 16px;font:inherit;font-size:1rem;border:1px solid var(--line);
-    border-radius:8px;background:var(--card);color:var(--ink);margin-bottom:20px}
-  input:focus{outline:2px solid var(--accent);outline-offset:1px}
-  ul{list-style:none;padding:0;border-top:1px solid var(--line)}
-  li a{display:flex;justify-content:space-between;align-items:center;gap:16px;
-    padding:18px 4px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}
-  li a:hover strong,li a:focus-visible strong{color:var(--accent)}
-  li a:focus-visible{outline:2px solid var(--accent)}
-  strong{font-size:1.15rem;font-weight:600;display:block}
-  small{color:var(--muted);font-size:.9rem}
-  code{color:var(--muted);font-size:.8rem;white-space:nowrap}
-  .vacio{color:var(--muted);padding:18px 4px}
-  @media (max-width:520px){ code{display:none} }
+  body{background:var(--bg);color:var(--ink);font-family:"Barlow",Arial,sans-serif;line-height:1.55}
+  a{color:inherit}
+
+  /* HEADER (como cremer.de: blanco, logo a la izquierda) */
+  .top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:env(safe-area-inset-top,0px);z-index:10}
+  .top-in{max-width:1140px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .logo img{height:34px;display:block}
+  .logo .txt{display:none;font-weight:700;font-size:1.6rem;letter-spacing:.08em;color:var(--azul);text-decoration:none}
+  .top nav a{text-decoration:none;color:var(--muted);font-weight:500}
+  .top nav a:hover{color:var(--azul)}
+
+  /* HERO */
+  .hero{background:var(--azul);color:#fff;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-8%;top:-40%;width:55%;height:180%;
+    background:var(--azul-osc);transform:skewX(-18deg);opacity:.55}
+  .hero-in{max-width:1140px;margin:0 auto;padding:72px 24px 96px;position:relative;z-index:1}
+  .hero .pre{font-weight:500;opacity:.85}
+  .hero h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700;line-height:1.02;margin-top:8px;max-width:14ch}
+  .hero p{margin-top:18px;font-size:1.15rem;max-width:44ch;opacity:.92}
+
+  /* CONTENIDO */
+  main{background:var(--gris);padding:0 0 72px}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .buscar{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+    padding:0 20px;transform:translateY(-50%);box-shadow:0 12px 30px -16px rgba(10,46,69,.4)}
+  .buscar svg{flex:none;color:var(--azul)}
+  .buscar input{flex:1;border:0;background:transparent;font:inherit;font-size:1.1rem;color:var(--ink);padding:18px 0}
+  .buscar input:focus{outline:none}
+  .buscar:focus-within{border-color:var(--azul)}
+
+  h2{font-size:1.9rem;font-weight:700;color:var(--azul-noche);margin:8px 0 24px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;list-style:none;padding:0}
+  .tile{display:flex;flex-direction:column;height:100%;background:#fff;text-decoration:none;
+    border-top:4px solid var(--azul);transition:box-shadow .15s ease,transform .15s ease}
+  .tile:hover,.tile:focus-visible{box-shadow:0 14px 30px -14px rgba(10,46,69,.45);transform:translateY(-2px)}
+  .tile:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+  .tile-top{padding:26px 26px 0;display:flex;justify-content:space-between;align-items:flex-start}
+  .ico{width:54px;height:54px;border-radius:50%;background:var(--celeste);color:var(--azul);display:grid;place-items:center}
+  .tile:hover .ico{background:var(--azul);color:#fff}
+  .tile-body{padding:18px 26px 0;flex:1}
+  .tile strong{display:block;font-size:1.35rem;font-weight:600;color:var(--azul-noche)}
+  .tile .d{color:var(--muted);display:block;margin-top:4px}
+  .tile-foot{margin-top:22px;padding:14px 26px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;color:var(--azul);font-weight:600}
+  .tile-foot small{color:var(--muted);font-weight:400;font-size:.85rem}
+  .vacio{color:var(--muted);grid-column:1/-1;padding:24px 0}
+
+  /* FOOTER */
+  footer{background:var(--azul-noche);color:#B7C8D4;font-size:.95rem}
+  footer .wrap{padding:36px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+  footer strong{color:#fff;font-weight:600}
+  footer a{color:#fff}
 </style>
 </head>
 <body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="logo" href="https://cremer.com.ar" target="_blank" rel="noopener" aria-label="Cremer y Asociados">
+      <img src="/images/cremer-logo.svg" alt="CREMER" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="txt">CREMER</span>
+    </a>
+    <nav><a href="https://cremer.com.ar" target="_blank" rel="noopener">cremer.com.ar</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-in">
+    <div class="pre">Industry · Biodiesel</div>
+    <h1>Planta Arroyo Seco</h1>
+    <p>Dashboards, informes y herramientas de la planta, todo en un mismo lugar.</p>
+  </div>
+</section>
+
 <main>
-  <header>
-    <h1>Arroyo Seco</h1>
-    <p>Todos los accesos de la planta en un solo lugar.</p>
-  </header>
-  <input id="buscar" type="search" placeholder="Buscar…" aria-label="Buscar acceso">
-  <ul id="lista"></ul>
+  <div class="wrap">
+    <label class="buscar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="buscar" type="search" placeholder="Buscar dashboard, informe…" aria-label="Buscar acceso">
+    </label>
+    <h2>Accesos</h2>
+    <ul class="grid" id="lista"></ul>
+  </div>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Cremer y Asociados</strong><br>Planta Arroyo Seco, Santa Fe</div>
+    <div>¿Falta algún acceso? Avisale a sistemas para sumarlo.</div>
+  </div>
+</footer>
+
 <script>
   // ▼ Para agregar un acceso nuevo, sumá una línea acá ▼
+  // icono: grafico | informe | camion | lab | link
   const accesos = [
-    { nombre: "Información AS",  desc: "Dashboard de información general", link: "/db_informacionas" },
-    { nombre: "Informe JT",      desc: "Informe JT",                        link: "/informejt" },
-    { nombre: "Camiones",        desc: "Dashboard de camiones",             link: "/db_camiones" },
-    { nombre: "Laboratorio",     desc: "Datos de laboratorio",              link: "/laboratorio" },
+    { nombre: "Información AS", desc: "Ventas, producción, cupos, consumos y despachos", link: "/db_informacionas", icono: "grafico" },
+    { nombre: "Informe JT",     desc: "Reporte de fin de turno de los jefes de turno",    link: "/informejt",        icono: "informe" },
+    { nombre: "Camiones",       desc: "Dashboard de camiones",                            link: "/db_camiones",      icono: "camion" },
+    { nombre: "Laboratorio",    desc: "Carga y visor de análisis de laboratorio",        link: "/laboratorio",      icono: "lab" },
   ];
+
+  const ICONOS = {
+    grafico:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    informe:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    camion:'<path d="M2 6h11v10H2zM13 10h5l3 3v3h-8"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    lab:'<path d="M9 3h6M10 3v6L4 19a1.5 1.5 0 0 0 1.3 2h13.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
+    link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+  };
+  const svg = (p, s=26) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+  const ext = svg('<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>', 18);
 
   const lista = document.getElementById("lista");
   function render(filtro = "") {
     const f = filtro.toLowerCase();
     const items = accesos.filter(a => (a.nombre + a.desc + a.link).toLowerCase().includes(f));
-    lista.innerHTML = items.length
-      ? items.map(a => `<li><a href="${a.link}">
-          <span><strong>${a.nombre}</strong><small>${a.desc}</small></span>
-          <code>cremer.com.ar${a.link}</code></a></li>`).join("")
-      : `<li class="vacio">No hay accesos con ese nombre.</li>`;
+    lista.innerHTML = items.length ? items.map(a => `
+      <li><a class="tile" href="${a.link}" target="_blank" rel="noopener">
+        <div class="tile-top"><span class="ico">${svg(ICONOS[a.icono] || ICONOS.link)}</span></div>
+        <div class="tile-body"><strong>${a.nombre}</strong><span class="d">${a.desc}</span></div>
+        <div class="tile-foot"><small>cremer.com.ar${a.link}</small>${ext}</div>
+      </a></li>`).join("")
+      : `<li class="vacio">No hay accesos que coincidan con “${filtro}”.</li>`;
   }
   document.getElementById("buscar").addEventListener("input", e => render(e.target.value));
   render();
 </script>
 </body>
 </html>
+
