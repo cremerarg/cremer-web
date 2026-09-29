@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arroyo Seco · Accesos</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF1EC; --ink:#1C2A22; --muted:#5E6B63; --line:#C9D1CA;
+    --accent:#C8962E; --card:#FFFFFF;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#141B17; --ink:#E7ECE8; --muted:#9AA69F; --line:#2D3832; --card:#1B241F;
+    }
+  }
+  *{box-sizing:inherit;margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;line-height:1.5}
+  main{max-width:720px;margin:0 auto;padding:48px 20px 64px}
+  header{border-left:6px solid var(--accent);padding-left:16px;margin-bottom:32px}
+  h1{font-size:clamp(2.2rem,7vw,3.4rem);font-weight:800;letter-spacing:-.02em;line-height:1}
+  header p{color:var(--muted);margin-top:8px}
+  input{width:100%;padding:14px 16px;font:inherit;font-size:1rem;border:1px solid var(--line);
+    border-radius:8px;background:var(--card);color:var(--ink);margin-bottom:20px}
+  input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  ul{list-style:none;padding:0;border-top:1px solid var(--line)}
+  li a{display:flex;justify-content:space-between;align-items:center;gap:16px;
+    padding:18px 4px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none}
+  li a:hover strong,li a:focus-visible strong{color:var(--accent)}
+  li a:focus-visible{outline:2px solid var(--accent)}
+  strong{font-size:1.15rem;font-weight:600;display:block}
+  small{color:var(--muted);font-size:.9rem}
+  code{color:var(--muted);font-size:.8rem;white-space:nowrap}
+  .vacio{color:var(--muted);padding:18px 4px}
+  @media (max-width:520px){ code{display:none} }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Arroyo Seco</h1>
+    <p>Todos los accesos de la planta en un solo lugar.</p>
+  </header>
+  <input id="buscar" type="search" placeholder="Buscar…" aria-label="Buscar acceso">
+  <ul id="lista"></ul>
+</main>
+<script>
+  // ▼ Para agregar un acceso nuevo, sumá una línea acá ▼
+  const accesos = [
+    { nombre: "Información AS",  desc: "Dashboard de información general", link: "/db_informacionas" },
+    { nombre: "Informe JT",      desc: "Informe JT",                        link: "/informejt" },
+    { nombre: "Camiones",        desc: "Dashboard de camiones",             link: "/db_camiones" },
+    { nombre: "Laboratorio",     desc: "Datos de laboratorio",              link: "/laboratorio" },
+  ];
+
+  const lista = document.getElementById("lista");
+  function render(filtro = "") {
+    const f = filtro.toLowerCase();
+    const items = accesos.filter(a => (a.nombre + a.desc + a.link).toLowerCase().includes(f));
+    lista.innerHTML = items.length
+      ? items.map(a => `<li><a href="${a.link}">
+          <span><strong>${a.nombre}</strong><small>${a.desc}</small></span>
+          <code>cremer.com.ar${a.link}</code></a></li>`).join("")
+      : `<li class="vacio">No hay accesos con ese nombre.</li>`;
+  }
+  document.getElementById("buscar").addEventListener("input", e => render(e.target.value));
+  render();
+</script>
+</body>
+</html>
