@@ -108,7 +108,7 @@
 
 <script>
   // ▼ Para agregar un acceso nuevo, sumá una línea acá ▼
-  // icono: grafico | informe | camion | lab | compra | permiso | link
+  // icono: grafico | informe | camion | lab | compra | permiso | hys | link
   const accesos = [
     { nombre: "Información AS",     desc: "Ventas, producción, cupos, consumos y despachos",          link: "/db_informacionas", icono: "grafico" },
     { nombre: "Informe JT",         desc: "Reporte de fin de turno de los jefes de turno",             link: "/informejt",        icono: "informe" },
@@ -116,6 +116,7 @@
     { nombre: "Laboratorio",        desc: "Carga y visor de análisis de laboratorio",                 link: "/laboratorio",      icono: "lab" },
     { nombre: "Orden de Compra",    desc: "Generar y enviar órdenes de compra Cremer y Latin Bio",    link: "/ordencompra",      icono: "compra" },
     { nombre: "Permiso de Trabajo", desc: "Generar permisos de trabajo para contratistas Cremer y Latin Bio", link: "/permisostrabajo", icono: "permiso" },
+    { nombre: "Capacitaciones HyS", desc: "Evaluación de Higiene y Seguridad para personal y contratistas",   link: "/hys/capacitaciones", icono: "hys" },
   ];
 
   const ICONOS = {
@@ -125,6 +126,7 @@
     lab:'<path d="M9 3h6M10 3v6L4 19a1.5 1.5 0 0 0 1.3 2h13.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/>',
     compra:'<path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/>',
     permiso:'<path d="M9 3h6v3H9z"/><path d="M9 4.5H6a1 1 0 0 0-1 1V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5.5a1 1 0 0 0-1-1h-3"/><path d="M9 14l2 2 4-4"/>',
+    hys:'<path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-4.5"/>',
     link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
   };
   const svg = (p, s=26) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
